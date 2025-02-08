@@ -7,7 +7,12 @@ import { PackageIcon, TrolleyIcon } from '@sanity/icons';
 function Header() {
    const {user} =useUser();
    const createClerkPasskey = async()=> {
-    await user?.createPasskey();
+    try {
+       const response = await user?.createPasskey();
+       console.log(response);
+    } catch (err) {
+        console.error("Error:",JSON.stringify(err,null,2));
+    }
    };
    console.log(user);
   return (
@@ -42,11 +47,14 @@ function Header() {
            ):(
             <SignInButton mode="modal"/>
         )}
-
-        <button onClick={createClerkPasskey} className="bg-white hover:bg-blue-700 hover:text-white animate-pulse text-blue-500 font-bold py-2 px-4 rounded border-blue-300 border">Create a Passkey now</button>
+         {user?.passkeys.length ===0 && (
+        <button onClick={createClerkPasskey}
+         className="bg-white hover:bg-blue-700 hover:text-white animate-pulse text-blue-500 font-bold py-2 px-4 rounded border-blue-300 border">Create a Passkey now
+        </button>
+        )}
         </ClerkLoaded>
         </div>
-        </div>
+    </div>
     </header>
   )
 }
