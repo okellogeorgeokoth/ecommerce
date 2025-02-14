@@ -7,7 +7,7 @@ export const getAllProducts =async ()=>{
    `);
    
         try {
-            //Use danityFetch to send the query
+            //Use sanityFetch to send the query
           const products= await sanityFetch({
             query: All_PRODUCTS_QUERY,
           });  
