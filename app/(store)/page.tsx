@@ -14,7 +14,7 @@ export default async function Home() {
 
       {/* Products & Categories Section */}
       <div className="flex flex-col items-center">
-        <ProductsView products={products} categories={categories} />
+        <ProductsView products={products}  categories={categories}/>
       </div>
     </div>
   );

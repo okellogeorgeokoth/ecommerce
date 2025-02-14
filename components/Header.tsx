@@ -17,17 +17,18 @@ function Header() {
    };
    console.log(user);
   return (
-    <header className='flex flex-wrap justify-between items-center px-4 py-2'>
+    <header className='flex flex-wrap justify-between items-center px-4 py-2 '>
         <div className="flex w-full flex-wrap justify-between items-center">
             <Link href="/" className="text-2xl font-bold text-blue-500 hover:opacity-50 cursor-pointer mx-auto sm:mx-0">
             <span className="flex items-center">
                 <Image
                     src="/Logo.jpg" // Update this path to your logo image
                     alt="Logo"
-                    width={180} // Set the desired width
-                    height={80} // Set the desired height
+                    width={140} // Set the desired width
+                    height={140} // Set the desired height
                     className="mr-2" // Add margin if needed
-                />
+                    priority
+               />
                 {/* Optional: Add text alongside the logo */}
             </span>
             </Link>
