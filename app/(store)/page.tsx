@@ -1,6 +1,7 @@
 import { getAllCategories } from "@/sanity/lib/products/getAllCategories";
 import { getAllProducts } from "@/sanity/lib/products/getAllProducts";
 import ProductsView from "@/components/ProductsView";
+import BlackFridayBanner from "@/components/BlackFridayBanner";
 
 export default async function Home() {
   // Fetch products and categories from Sanity
@@ -8,7 +9,8 @@ export default async function Home() {
   const categories = await getAllCategories();
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
+    <div /*className="min-h-screen bg-gray-100 p-4"*/>
+      <BlackFridayBanner />
       {/* Page Header */}
       <h1 className="text-2xl font-bold text-center mb-6">Welcome to Our Store</h1>
 
