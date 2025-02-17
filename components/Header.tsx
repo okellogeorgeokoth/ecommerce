@@ -1,102 +1,75 @@
 "use client";
-import React from "react";
-import { ClerkLoaded, SignedIn, SignInButton, UserButton, useUser } from "@clerk/nextjs";
+import React from 'react'
+import {ClerkLoaded, SignedIn, SignInButton, UserButton, useUser} from "@clerk/nextjs";
 import Link from "next/link";
 import Form from "next/form";
-import { PackageIcon, TrolleyIcon } from "@sanity/icons";
-import Image from "next/image";
-
+import { PackageIcon, TrolleyIcon } from '@sanity/icons';
+import Image from 'next/image';
 function Header() {
-  const { user } = useUser();
-
-  const createClerkPasskey = async () => {
+   const {user} =useUser();
+   const createClerkPasskey = async()=> {
     try {
-      const response = await user?.createPasskey();
-      console.log(response);
+       const response = await user?.createPasskey();
+       console.log(response);
     } catch (err) {
-      console.error("Error:", JSON.stringify(err, null, 2));
+        console.error("Error:",JSON.stringify(err,null,2));
     }
-  };
-
+   };
+   console.log(user);
   return (
-    <header className="flex flex-wrap justify-between items-center px-4 py-2 bg-white shadow-md">
-      <div className="flex w-full justify-between items-center">
-        <Link href="/" className="text-2xl font-bold text-blue-500 hover:opacity-50 cursor-pointer mx-auto sm:mx-0">
-          <span className="flex items-center">
-            <Image
-              src="/Logo.jpg"
-              alt="Logo"
-              width={140}
-              height={140}
-              className="mr-2"
-              priority
-            />
-          </span>
-        </Link>
-
-        <nav className="hidden sm:flex space-x-6">
-          <Link href="/" className="hover:text-gray-700">Home</Link>
-          <Link href="#" className="hover:text-gray-700">About Us</Link>
-          <Link href="#" className="hover:text-gray-700">Artists & NFTs</Link>
-          <Link href="#" className="hover:text-gray-700">Exhibitions & News</Link>
-          <div className="group relative">
-            <Link href="#" className="hover:text-gray-700">Artworks</Link>
-            <ul className="absolute left-0 hidden space-y-2 shadow-lg group-hover:block">
-              <li><Link href="#" className="block px-4 py-2">Painting</Link></li>
-              <li><Link href="#" className="block px-4 py-2">Drawing</Link></li>
-            </ul>
-          </div>
-          <Link href="#" className="hover:text-gray-700">Contact Us</Link>
-        </nav>
-
-        <Form action="/search" className="w-full sm:w-auto sm:flex-1 sm:mx-4 mt-2 sm:mt-0">
-          <input
-            type="text"
-            name="query"
-            placeholder="Search for Products"
-            className="bg-gray-100 text-gray-800 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 border w-full max-w-4xl"
-          />
+    <header className='flex flex-wrap justify-between items-center px-4 py-2 '>
+        <div className="flex w-full flex-wrap justify-between items-center">
+            <Link href="/" className="text-2xl font-bold text-blue-500 hover:opacity-50 cursor-pointer mx-auto sm:mx-0">
+            <span className="flex items-center">
+                <Image
+                    src="/Logo.jpg" // Update this path to your logo image
+                    alt="Logo"
+                    width={140} // Set the desired width
+                    height={140} // Set the desired height
+                    className="mr-2" // Add margin if needed
+                    priority
+               />
+                {/* Optional: Add text alongside the logo */}
+            </span>
+            </Link>
+        <Form action='/search' className="w-full sm:w-auto sm:flex-1 sm:mx-4 mt-2 sm:mt-0">
+            <input type="text" name="query" placeholder="Search for Products" className="bg-gray-100 text-gray-800 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 border w-full max-w-4xl"/>
         </Form>
-
-        <div className="flex items-center space-x-4 mt-4 sm:mt-0 ">
-          <Link href="/basket" className="relative flex items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            <TrolleyIcon className="w-6 h-6" />
-            <span>My Basket</span>
-          </Link>
-
-          <ClerkLoaded>
-            <SignedIn>
-              <Link href="/orders" className="relative flex items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                <PackageIcon className="w-6 h-6" />
-                <span>My Orders</span>
-              </Link>
-            </SignedIn>
-
-            {user ? (
-              <div className="flex items-center space-x-2">
-                <UserButton />
-                <div className="hidden sm:block text-x-5">
-                  <p className="hidden sm:block text-x-5">Welcome Back</p>
-                  <p className="font-bold">{user.fullName}!</p>
-                </div>
-              </div>
-            ) : (
-              <SignInButton mode="modal" />
-            )}
-
-            {user?.passkeys.length === 0 && (
-              <button
-                onClick={createClerkPasskey}
-                className="bg-white hover:bg-blue-700 hover:text-white animate-pulse text-blue-500 font-bold py-2 px-4 rounded border-blue-300 border"
-              >
-                Create a Passkey now
-              </button>
-            )}
-          </ClerkLoaded>
+        <div className="flex items-center space-x-4 mt-4 sm:mt-0 flex-1 sm:flex-none">
+        <Link href="/basket" className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+        <TrolleyIcon className="w-6 h-6"></TrolleyIcon>
+        <span>My Basket</span>
+        </Link>
+      
+        {/*User area*/}
+        <ClerkLoaded>
+        <SignedIn>
+        <Link href="/orders" className="flex-1 relative flex justify-center sm:justify-start sm:flex-none items-center space-x-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+        <PackageIcon className="w-6 h-6"></PackageIcon>
+        <span>My Orders</span>
+        </Link>
+        </SignedIn>
+        {user ? (
+            <div className="flex items-center space-x-2`">
+            <UserButton />
+            <div className="hidden sm:block text-x-5">
+                <p className="hidden sm:block text-x-5">Welcome Back</p>
+                <p className="font-bold">{user.fullName}!</p>
+            </div>
+           </div>
+           ):(
+            <SignInButton mode="modal"/>
+        )}
+         {user?.passkeys.length ===0 && (
+        <button onClick={createClerkPasskey}
+         className="bg-white hover:bg-blue-700 hover:text-white animate-pulse text-blue-500 font-bold py-2 px-4 rounded border-blue-300 border">Create a Passkey now
+        </button>
+        )}
+        </ClerkLoaded>
         </div>
-      </div>
+    </div>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header
