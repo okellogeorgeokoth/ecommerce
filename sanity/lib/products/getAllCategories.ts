@@ -2,7 +2,7 @@ import {defineQuery} from "next-sanity";
 import {sanityFetch} from "../live";
 
 //function to get all categories
-export const getAllCategories =async ()=>{
+export const getAllCategories =async (_slug: string)=>{
     const All_CATEGORIES_QUERY = defineQuery(`
         *[_type == "category"] | order(name asc)
    `);

@@ -11,7 +11,7 @@ async function ProductPage({
         slug: string;
     };
 }) {
-    const { slug } = await params; // No need to await params, as it's not a Promise
+    const { slug } =  params; // No need to await params, as it's not a Promise
     const product = await getProductBySlug(slug);
 
     // If the product is not found, return a 404 page

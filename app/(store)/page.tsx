@@ -12,7 +12,7 @@ export default async function Home() {
     <div /*className="min-h-screen bg-gray-100 p-4"*/>
       <BlackFridayBanner />
       {/* Page Header */}
-      <h1 className="text-2xl font-bold text-center mb-6">Welcome to Our Store</h1>
+      <h1 className="text-2xl font-bold text-center mb-6 mt-2">Welcome to Our Store</h1>
 
       {/* Products & Categories Section */}
       <div className="flex flex-col items-center">

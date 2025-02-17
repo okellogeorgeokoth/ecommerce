@@ -1,13 +1,12 @@
 'use client';
 
 import { Category } from "@/sanity.types";
-import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Check, ChevronsUpDown } from "lucide-react";
+import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "cmdk";
-import { cn } from "@/lib/utils";
 
 interface CategorySelectorProps {
     categories: Category[];
@@ -50,10 +49,13 @@ export function CategorySelectorComponent({ categories }: CategorySelectorProps)
                                     key={category._id}
                                     value={category.title}
                                     className="flex items-center justify-between cursor-pointer px-3 py-2 rounded hover:bg-gray-100"
-                                    onSelect={() => {
-                                        setSelectedCategory(category);
-                                        router.push(`/categories/${category.slug?.current}`);
-                                        setOpen(false);
+                                    onSelect={(value) => {
+                                        const selected = categories.find(cat => cat.title === value);
+                                        if (selected) {
+                                            setSelectedCategory(selected);
+                                            router.push(`/categories/${selected.slug?.current}`);
+                                            setOpen(false);
+                                        }
                                     }}
                                 >
                                     {category.title}
