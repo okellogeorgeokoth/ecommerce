@@ -9,6 +9,7 @@ import Image from "next/image";
 function Header() {
   const { user } = useUser();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);  // State for dropdown
 
   const createClerkPasskey = async () => {
     try {
@@ -21,6 +22,10 @@ function Header() {
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown visibility
   };
 
   return (
@@ -51,8 +56,25 @@ function Header() {
       {/* Navbar Links - Always visible on large screens */}
       <nav className="hidden sm:flex sm:items-center space-x-6">
         <Link href="/" className="hover:text-gray-500">Home</Link>
-        <Link href="/about" className="hover:text-gray-500">About Us</Link>
-        <Link href="/contact" className="hover:text-gray-500">Contact Us</Link>
+        {/* About Us Dropdown */}
+        <div className="relative">
+          <button onClick={toggleDropdown} className="hover:text-gray-500">
+            About Us
+          </button>
+          {/* Dropdown Menu */}
+          {isDropdownOpen && (
+            <div className="absolute left-0 mt-2 w-48 bg-white shadow-lg rounded-md z-50">
+              <Link href="/about-vinceville" className="block px-2 py-2 text-gray-800 hover:bg-gray-100">About Vinceville</Link>
+              <Link href="/codes-of-practice" className="block px-2 py-2 text-gray-800 hover:bg-gray-100">Codes of Practice</Link>
+            </div>
+          )}
+        </div>
+            <Link href="/services" className="hover:text-gray-400" onClick={toggleMenu}>Our Services</Link>
+            <Link href="/sell-art" className="hover:text-gray-400" onClick={toggleMenu}>Sell Art</Link>
+            <Link href="/artists" className="hover:text-gray-400" onClick={toggleMenu}>Artists</Link>
+            <Link href="/exhibitions" className="hover:text-gray-400" onClick={toggleMenu}>Exhibitions</Link>
+            <Link href="/blog" className="hover:text-gray-400" onClick={toggleMenu}>Blog/News</Link>
+            <Link href="/contact" className="hover:text-gray-400" onClick={toggleMenu}>Contact Us</Link>
       </nav>
 
       {/* Fullscreen Mobile Menu Overlay (Appears only on small screens) */}
@@ -67,6 +89,11 @@ function Header() {
           <nav className="flex flex-col space-y-6 text-center text-xl">
             <Link href="/" className="hover:text-gray-400" onClick={toggleMenu}>Home</Link>
             <Link href="/about" className="hover:text-gray-400" onClick={toggleMenu}>About Us</Link>
+            <Link href="/services" className="hover:text-gray-400" onClick={toggleMenu}>Our Services</Link>
+            <Link href="/services" className="hover:text-gray-400" onClick={toggleMenu}>Sell Art</Link>
+            <Link href="/services" className="hover:text-gray-400" onClick={toggleMenu}>Artists</Link>
+            <Link href="/services" className="hover:text-gray-400" onClick={toggleMenu}>Exhibitions</Link>
+            <Link href="/services" className="hover:text-gray-400" onClick={toggleMenu}>Blog/News</Link>
             <Link href="/contact" className="hover:text-gray-400" onClick={toggleMenu}>Contact Us</Link>
 
             {/* Sign In Button inside the menu on small screens */}
