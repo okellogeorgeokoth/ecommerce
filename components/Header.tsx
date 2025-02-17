@@ -68,6 +68,23 @@ function Header() {
             <Link href="/" className="hover:text-gray-400" onClick={toggleMenu}>Home</Link>
             <Link href="/about" className="hover:text-gray-400" onClick={toggleMenu}>About Us</Link>
             <Link href="/contact" className="hover:text-gray-400" onClick={toggleMenu}>Contact Us</Link>
+
+            {/* Sign In Button inside the menu on small screens */}
+            <div className="mt-4">
+              <ClerkLoaded>
+                {user ? (
+                  <div className="flex items-center space-x-2">
+                    <UserButton />
+                    <div className="text-sm">
+                      <p>Welcome Back</p>
+                      <p className="font-bold">{user.fullName}!</p>
+                    </div>
+                  </div>
+                ) : (
+                  <SignInButton mode="modal" />
+                )}
+              </ClerkLoaded>
+            </div>
           </nav>
         </div>
       )}
@@ -97,6 +114,7 @@ function Header() {
           </Link>
         </div>
 
+        {/* Keep the sign-in section here for large screens */}
         <ClerkLoaded>
           <SignedIn>
             <Link
