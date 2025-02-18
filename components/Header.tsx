@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { ClerkLoaded, SignedIn, SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import Link from "next/link";
-import { PackageIcon, TrolleyIcon, MenuIcon } from "@sanity/icons";
+import { TrolleyIcon, MenuIcon } from "@sanity/icons";
 import Image from "next/image";
 
 function Header() {
@@ -56,7 +56,6 @@ function Header() {
                 </div>
               )}
             </div>
-            <Link href="/services" className="text-black hover:text-blue-600">Our Services</Link>
             <Link href="/sell-art" className="text-black hover:text-blue-600">Sell Art</Link>
             <Link href="/artists" className="text-black hover:text-blue-600">Artists</Link>
             <Link href="/exhibitions" className="text-black hover:text-blue-600">Exhibitions</Link>
@@ -68,12 +67,9 @@ function Header() {
         {/* Right Section: Search & User Actions */}
         <div className="flex items-center space-x-6">
           {/* Search Bar */}
-          <input
-            type="text"
-            placeholder="Search for Products"
-            className="px-4 py-2 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-
+          <form action='/search' className="w-full sm:w-auto sm:flex-1 sm:mx-4 mt-2 sm:mt-0">
+            <input type="text" name="query" placeholder="Search for Products" className="bg-gray-100 text-gray-800 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 border w-full max-w-4xl"/>
+        </form>
           {/* Basket */}
           <Link href="/basket" className="text-black hover:text-blue-600">
             <TrolleyIcon className="w-6 h-6" />
@@ -108,7 +104,6 @@ function Header() {
           <nav className="flex flex-col space-y-6 text-center text-xl">
             <Link href="/" className="hover:text-gray-400" onClick={toggleMenu}>Home</Link>
             <Link href="/about" className="hover:text-gray-400" onClick={toggleMenu}>About Us</Link>
-            <Link href="/services" className="hover:text-gray-400" onClick={toggleMenu}>Our Services</Link>
             <Link href="/sell-art" className="hover:text-gray-400" onClick={toggleMenu}>Sell Art</Link>
             <Link href="/artists" className="hover:text-gray-400" onClick={toggleMenu}>Artists</Link>
             <Link href="/exhibitions" className="hover:text-gray-400" onClick={toggleMenu}>Exhibitions</Link>
