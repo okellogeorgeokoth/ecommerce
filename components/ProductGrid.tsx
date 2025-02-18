@@ -10,8 +10,8 @@ function ProductGrid({ products }: { products: Product[] }) {
             <motion.div
                 key={product._id}
                 layout
-                initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
+                initial={{ opacity: 0 }}
                 exit={{ opacity: 0 }}
                 className="flex justify-center"
             >
